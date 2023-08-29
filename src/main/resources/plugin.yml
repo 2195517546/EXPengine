@@ -1,0 +1,12 @@
+name: EXPengine
+version: 0.0.2-SNAPSHOT
+main: com.expengine.expengine.EXPengine
+api-version: 1.20
+author: Uiloalxise
+description: 一个修仙玩法类的插件
+commands:
+  expengine:
+    permission: exp_0
+    permission-message: "你没有权限使用help命令"
+    description: 帮助列出指令
+    aliases: exphelp,expe
