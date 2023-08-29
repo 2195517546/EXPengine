@@ -11,7 +11,7 @@ import java.io.File;
 public final class EXPengine extends JavaPlugin {
     private static EXPengine instance;
 
-    File folder = new File(getDataFolder(),"\\playeryml");//创建玩家数据文件夹
+    File folder = new File(getDataFolder(),"\\playeryml");//创建玩家数据文件夹234
     @Override
     public void onEnable() {
         instance = this;
