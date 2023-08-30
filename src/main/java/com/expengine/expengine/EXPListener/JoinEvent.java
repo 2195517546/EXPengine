@@ -28,6 +28,8 @@ public class JoinEvent implements Listener {
                 FileConfiguration filein = YamlConfiguration.loadConfiguration(playerfile);
                 filein.set("Name",name);
                 filein.set("exp",0);
+                filein.set("level",0);
+                filein.set("hideexp",0);
                 try
                 {
                     filein.save(playerfile);
