@@ -68,8 +68,8 @@ public class EXPenginehelp implements CommandExecutor {
                     sender.sendMessage("此修士暂时脱离了天机之中");
                     return false;
                 }
-                FileConfiguration targetfileout =YamlConfiguration.loadConfiguration(targetfile);
-                FileConfiguration senderfileout =YamlConfiguration.loadConfiguration(senderfile);
+                FileConfiguration targetfileout =YamlConfiguration.loadConfiguration(targetfile);//获取目标文件流
+                FileConfiguration senderfileout =YamlConfiguration.loadConfiguration(senderfile);//获取指令方文件流
                 if(targetfileout.getInt("hideexp")==1)
                 {
                     sender.sendMessage("该修士用来秘法遮蔽修为，无法探查。");
