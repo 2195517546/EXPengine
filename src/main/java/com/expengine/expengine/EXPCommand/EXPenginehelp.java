@@ -7,8 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
 import java.io.File;
+import java.security.Key;
 
 public class EXPenginehelp implements CommandExecutor {
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
@@ -26,7 +28,8 @@ public class EXPenginehelp implements CommandExecutor {
         if(args.length==0)
         {
             helpMenuSender(sender);
-        }else if(args.length ==1)
+        }
+        else if(args.length ==1)
         {
             String argis=args[0];
             if(argis.equalsIgnoreCase("help"))//帮助
@@ -38,8 +41,8 @@ public class EXPenginehelp implements CommandExecutor {
                 String name =sender.getName();//获取命令发送者名字
                 File playerFile = new File(folder.getAbsolutePath()+"\\"+name+".yml");//获取玩家数据路径
                 FileConfiguration fileout = YamlConfiguration.loadConfiguration(playerFile);//输出玩家数据
-                int expPoint = fileout.getInt("exp");
-                sender.sendMessage("经验有"+ expPoint);
+                int exp_point = fileout.getInt("exp");
+                sender.sendMessage("经验有"+ exp_point);
             }
         }else if(args.length==2)
         {
@@ -47,7 +50,7 @@ public class EXPenginehelp implements CommandExecutor {
             String argis2=args[1];
             if(argis1.equalsIgnoreCase("exp"))
             {
-                String s_name =sender.getName();
+                String s_name =sender.getName();//发送方的名称
                 String t_name =argis2;//获取目标名称
 
                 Player targetPlayer=org.bukkit.Bukkit.getPlayerExact(t_name);
@@ -79,10 +82,10 @@ public class EXPenginehelp implements CommandExecutor {
                 if(senderFileout.getInt("exp")>=targetFileout.getInt("exp") && targetFileout.getInt("hideexp")!=1)
                 {
                     if (senderFileout.getInt("level") == senderFileout.getInt("level")) {
-                        sender.sendMessage("修士" + t_name + "的境界是" + "(一个函数,用于表示境界名称)" + "修为有" + targetFileout.getInt("exp"));
+                        sender.sendMessage("修士" + t_name + "的境界是" + LevelSwitch(targetFileout.getInt("level")) + "修为有" + targetFileout.getInt("exp"));
                         targetPlayer.sendMessage("修士" + s_name + "探查了你的修为");
                     } else {
-                        sender.sendMessage("修士" + t_name + "的境界是" + " (一个函数,用于表示境界名称) " + "修为有" + targetFileout.getInt("exp"));
+                        sender.sendMessage("修士" + t_name + "的境界是" + LevelSwitch(targetFileout.getInt("level")) + "修为有" + targetFileout.getInt("exp"));
                         targetPlayer.sendMessage("你感觉有修士探查了你的修为");
                     }
                 }else {
@@ -92,5 +95,15 @@ public class EXPenginehelp implements CommandExecutor {
             }
         }
         return false;
+    }
+    public String LevelSwitch(int l_num) //level数字转level文字
+    {
+        String key = "level."+l_num;
+        if(EXPengine.getInstance().getConfig().contains(key))
+        {
+            return new String(EXPengine.getInstance().getConfig().getString(key));
+        }else{
+            return new String("error");
+        }
     }
 }

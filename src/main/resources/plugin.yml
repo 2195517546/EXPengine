@@ -19,3 +19,8 @@ commands:
     permission-message: "你没有权限使用help命令"
     description: 帮助列出指令
     aliases: expe
+  expoperater:
+    permission: op
+    permission-message: "你没有权限使用OP命令"
+    description: op权限指令
+    aliases: expo

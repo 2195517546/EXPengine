@@ -16,6 +16,7 @@ public class JoinEvent implements Listener {
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
     @EventHandler
     public void JoinEventListener(PlayerJoinEvent event){//监听玩家进入
+
         System.out.println("EXPListener启动了");//测试用
         Player p = event.getPlayer();//获取玩家
         String name =p.getName();//获取玩家名称
