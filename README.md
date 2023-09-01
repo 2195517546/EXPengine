@@ -12,15 +12,15 @@ MC插件,API版本是1.20
 创建玩家数据文件夹.yml
 
 ### 普通命令<br>
-/expe exp [玩家名]<br>
+`/expe exp [玩家名]`<br>
 
 获取当前修为(EXP),以及别人的修为<br>
 并且对方知晓你探查了他（是不是很硬核）<br>
 ## 更新
 #### config增加了level键，自定义修为每个阶段的的名称;
 ## [最新]增加了管理员命令
-/expo giveexp 给经验<br>
-/expo setexp 设置阶段
+`/expo giveexp [玩家名] [数量]` 给经验<br>
+`/expo setexp [玩家名] [数量]` 设置阶段
 
 ## [ 下次部分更新 ]
 重载config的指令
