@@ -21,7 +21,7 @@ MC插件,API版本是1.20
 ## [最新]增加了管理员命令
 `/expo giveexp [玩家名] [数量]` 给经验<br>
 `/expo removexp [玩家名] [数量]` 减经验(最少到0<br>
-`/expo setlevel [玩家名] [数量]` 设置阶段
+`/expo setlevel [玩家名] [数量]` 设置阶段<br>
 `/expo reload` 重新加载插件配置文件config.yml
 ## [ 下次部分更新 ]
 ##### 修为系统其一:
