@@ -21,7 +21,9 @@ public class EXPengineOPhelp implements CommandExecutor {
         sender.sendMessage("简写可以为expo");
         sender.sendMessage("/expoperater 获取帮助");
         sender.sendMessage("/expoperater help 获取帮助");
+        sender.sendMessage("/expoperater reload 重新加载插件");
         sender.sendMessage("/expoperater giveexp [玩家名称] [给予数量] 给予修为");
+        sender.sendMessage("/expoperater removexp [玩家名称] [减去数量] 移除修为，并且不可以为负数");
         sender.sendMessage("/expoperater setlevel [玩家名称] 设置阶段");
     }
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
@@ -37,6 +39,10 @@ public class EXPengineOPhelp implements CommandExecutor {
             if(argis.equalsIgnoreCase("help"))//帮助
             {
                 helpMenuSender(sender);
+            }
+            if(argis.equalsIgnoreCase("reload"))//重新加载插件
+            {
+                EXPengine.getInstance().reloadConfig();
             }
         }
         if(args.length==3)
@@ -68,6 +74,38 @@ public class EXPengineOPhelp implements CommandExecutor {
 
                 sender.sendMessage(sender.getName()+"发送了 "+t_name + " 点 "+ g_exp+" EXP");//管理命令所以不会扣修为。
                 targetPlayer.sendMessage("获取了EXP "+g_exp+" 点");
+
+            }
+            if(argis1.equalsIgnoreCase("removexp"))
+            {
+                String t_name =argis2;//获取目标名称
+                Player targetPlayer=org.bukkit.Bukkit.getPlayerExact(t_name);//获取目标玩家
+
+                File targetFile=new File(folder.getAbsolutePath()+"\\"+t_name+".yml");//目标
+                if(!targetFile.exists()){
+                    sender.sendMessage("不存在对象");
+                    return false;
+                }
+                if (targetPlayer == null || !targetPlayer.isOnline()) {
+                    sender.sendMessage("此修士暂时脱离了天机之中");
+                    return false;
+                }
+
+                FileConfiguration targetFileout = YamlConfiguration.loadConfiguration(targetFile);//获取目标文件流
+                int s_exp = targetFileout.getInt("exp");//初识数值
+                int r_exp = parseInt(argis3);//输入数值
+                if(r_exp>s_exp)
+                {
+                    int f_exp = 0;
+                    targetFileout.set("exp",f_exp);
+                    sender.sendMessage("输入值过大，默认对方"+t_name+"修为移除至0");
+                    targetPlayer.sendMessage("你的修为被管理员置为了0");
+                    return false;
+                }
+                int f_exp = s_exp-r_exp;//最终数值
+                targetFileout.set("exp",f_exp);
+                targetPlayer.sendMessage("你的修为被管理员减少到"+f_exp+" ，你原来有"+s_exp);
+                sender.sendMessage("你将"+t_name+"的修为减少到了"+f_exp+"而原来他有"+s_exp);
 
             }
             if(argis1.equalsIgnoreCase("setlevel"))
