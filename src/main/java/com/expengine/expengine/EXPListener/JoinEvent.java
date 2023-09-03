@@ -1,6 +1,7 @@
 package com.expengine.expengine.EXPListener;
 
 import com.expengine.expengine.EXPengine;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -13,6 +14,14 @@ import java.io.IOException;
 
 public class JoinEvent implements Listener {
 
+    public void fileset(Configuration filein)
+    {
+        filein.set("exp",0);
+        filein.set("level",0);
+        filein.set("hideexp",0);
+        filein.set("baseattrib.healthpoint",0);
+        filein.set("baseattrib.magicpoint",0);
+    }
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
     @EventHandler
     public void JoinEventListener(PlayerJoinEvent event){//监听玩家进入
@@ -28,9 +37,7 @@ public class JoinEvent implements Listener {
                 playerfile.createNewFile();
                 FileConfiguration filein = YamlConfiguration.loadConfiguration(playerfile);
                 filein.set("Name",name);
-                filein.set("exp",0);
-                filein.set("level",0);
-                filein.set("hideexp",0);
+                fileset(filein);
                 try
                 {
                     filein.save(playerfile);

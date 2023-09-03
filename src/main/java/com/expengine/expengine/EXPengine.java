@@ -2,6 +2,7 @@ package com.expengine.expengine;
 
 import com.expengine.expengine.EXPCommand.EXPengineOPhelp;
 import com.expengine.expengine.EXPCommand.EXPenginehelp;
+import com.expengine.expengine.EXPCommand.EXPsystem;
 import com.expengine.expengine.EXPListener.JoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -19,13 +20,12 @@ public final class EXPengine extends JavaPlugin {
         //初始化一个Config
         registerConfig();
 
-        say("EXPengine开启了");
-
         //监听注册
         Bukkit.getPluginManager().registerEvents(new JoinEvent(),this);//监听加入事件
 
         //命令注册
         getCommand("expengine").setExecutor(new EXPenginehelp());
+        getCommand("expsystem").setExecutor(new EXPsystem());
         getCommand("expoperater").setExecutor(new EXPengineOPhelp());
 
         //Bukkit.getPluginCommand().register();
@@ -37,7 +37,7 @@ public final class EXPengine extends JavaPlugin {
         }
 
         // Plugin startup logic
-
+        say("EXPengine开启了");
     }
 
     @Override
