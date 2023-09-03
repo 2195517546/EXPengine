@@ -26,3 +26,5 @@ levelquailty: #每提升等级所增加的属性
   2:  #从1升级到2时，增加的属性(不是设置为，是增加
     healthpoint: 10
     magicpoint: 10
+level2: #第二种修炼阶段
+  1:
