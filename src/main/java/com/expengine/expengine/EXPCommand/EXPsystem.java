@@ -46,7 +46,7 @@ public class EXPsystem implements CommandExecutor {
                 int level = senderUse.getInt("level");//获取当前level
                 int hp=senderUse.getInt("baseattrib.healthpoint");
                 int mp=senderUse.getInt("baseattrib.magicpoint");
-                int c_exp = EXPengine.getInstance().getConfig().getInt("leveltolevel."+level);
+                int c_exp = EXPengine.getInstance().getConfig().getInt("leveltolevel."+level);//升级所需level
                 int levelTribualation = level+1;
                 if(EXPengine.getInstance().getConfig().getBoolean("leveltribualation."+levelTribualation))
                 {

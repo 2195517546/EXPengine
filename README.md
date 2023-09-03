@@ -16,8 +16,17 @@ MC插件,API版本是1.20
 
 获取当前修为(EXP),以及别人的修为<br>
 并且对方知晓你探查了他（是不是很硬核）<br>
+
+## config
+level:阶段名称<br>
+leveltolevel:升级所需修为,1:100指从1升级到2要100<br>
+leveltribualation:渡劫等级，比如金丹期要渡劫并且雷劈4次就是14:4<br>
+levelad:破境界公告:`数字`境界等级;`self`若为0则仅为自己可见;`words`破境界标语<br>
+levelquailty:`数字`境界等级;`healthpoint`生命值加成;`magicpoint`法力值加成<br>
+level[数字]:表示第n种修炼阶段，比如体法双修
 ## 更新
 #### config增加了level键，自定义修为每个阶段的的名称;
+#### config增加
 ## [最新]增加了管理员命令
 `/expo giveexp [玩家名] [数量]` 给经验<br>
 `/expo removexp [玩家名] [数量]` 减经验(最少到0<br>
