@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 
 public class EXPsystem implements CommandExecutor {
 
@@ -17,9 +18,9 @@ public class EXPsystem implements CommandExecutor {
         sender.sendMessage("EXPengine的system指令有:");
         sender.sendMessage("全写为expsystem");
         sender.sendMessage("简写可以为exps");
-        sender.sendMessage("/expoperater 获取帮助");
-        sender.sendMessage("/expoperater help 获取帮助");
-        sender.sendMessage("/expoperater levelup 境界提升(需要花费修为)");
+        sender.sendMessage("/expsystem 获取帮助");
+        sender.sendMessage("/expsystem help 获取帮助");
+        sender.sendMessage("/expsystem levelup 境界提升(需要花费修为)");
 
     }
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
@@ -46,6 +47,12 @@ public class EXPsystem implements CommandExecutor {
                 int level = senderUse.getInt("level");//获取当前level
                 int hp=senderUse.getInt("baseattrib.healthpoint");
                 int mp=senderUse.getInt("baseattrib.magicpoint");
+                boolean error_C_exp =EXPengine.getInstance().getConfig().getBoolean("leveltolevel."+level);
+                if(!error_C_exp)
+                {
+                    sender.sendMessage("进阶未知");
+                    return false;
+                }
                 int c_exp = EXPengine.getInstance().getConfig().getInt("leveltolevel."+level);//升级所需level
                 int levelTribualation = level+1;
                 if(EXPengine.getInstance().getConfig().getBoolean("leveltribualation."+levelTribualation))
@@ -60,15 +67,23 @@ public class EXPsystem implements CommandExecutor {
                     level++;
                     int f_hp=hp+EXPengine.getInstance().getConfig().getInt("levelquailty."+level+"healthpoint");
                     int f_mp=mp+EXPengine.getInstance().getConfig().getInt("levelquailty."+level+"magicpoint");
+
+                    //保存
                     senderUse.set("baseattrib.healthpoint",f_hp);
                     senderUse.set("baseattrib.magicpoint",f_mp);
                     senderUse.set("level",level);
                     senderUse.set("exp",f_exp);
+                    try {
+                        senderUse.save(senderFile);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
 
                     sender.sendMessage("你已提升至"+LevelSwitch(level));
                     if(EXPengine.getInstance().getConfig().getBoolean("levellad."+level) && 0 == EXPengine.getInstance().getConfig().getInt("levellad."+level+".self")){
                         String word=EXPengine.getInstance().getConfig().getString("levelad."+level+"words");
-                        org.bukkit.Bukkit.broadcastMessage(word);
+                        org.bukkit.Bukkit.broadcastMessage(sender.getName() +" "+ word);
                     }
                 }else{
                     sender.sendMessage("修为不足,无法进阶");
@@ -81,7 +96,7 @@ public class EXPsystem implements CommandExecutor {
     }
     public String LevelSwitch(int l_num) //level数字转level文字
     {
-        String key = "level."+l_num;
+        String key = "level."+ l_num ;
         if(EXPengine.getInstance().getConfig().contains(key))
         {
             return EXPengine.getInstance().getConfig().getString(key);

@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
@@ -70,7 +71,13 @@ public class EXPengineOPhelp implements CommandExecutor {
                 int g_exp = parseInt(argis3);//输入数值
                 int f_exp = s_exp+g_exp;//最终数值
 
+
                 targetFileout.set("exp",f_exp);//设置数值
+                try {
+                    targetFileout.save(targetFile);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
                 sender.sendMessage(sender.getName()+"发送了 "+t_name + " 点 "+ g_exp+" EXP");//管理命令所以不会扣修为。
                 targetPlayer.sendMessage("获取了EXP "+g_exp+" 点");
@@ -97,13 +104,28 @@ public class EXPengineOPhelp implements CommandExecutor {
                 if(r_exp>s_exp)
                 {
                     int f_exp = 0;
+
                     targetFileout.set("exp",f_exp);
+                    try {
+                        targetFileout.save(targetFile);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     sender.sendMessage("输入值过大，默认对方"+t_name+"修为移除至0");
                     targetPlayer.sendMessage("你的修为被管理员置为了0");
+
                     return false;
                 }
+
                 int f_exp = s_exp-r_exp;//最终数值
+                //保存
                 targetFileout.set("exp",f_exp);
+                try {
+                    targetFileout.save(targetFile);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
                 targetPlayer.sendMessage("你的修为被管理员减少到"+f_exp+" ，你原来有"+s_exp);
                 sender.sendMessage("你将"+t_name+"的修为减少到了"+f_exp+"而原来他有"+s_exp);
 
@@ -124,10 +146,17 @@ public class EXPengineOPhelp implements CommandExecutor {
                 }
 
                 FileConfiguration targetFileout = YamlConfiguration.loadConfiguration(targetFile);//获取目标文件流
-                int s_level = targetFileout.getInt("exp");//初识数值
+                int s_level = targetFileout.getInt("level");//初识数值
                 int g_level = parseInt(argis3);//输入数值
 
-                targetFileout.set("exp",g_level);//设置数值
+                //保存
+                targetFileout.set("level",g_level);//设置数值
+                try {
+                    targetFileout.save(targetFile);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
 
                 sender.sendMessage("将 "+t_name + "阶段设置为"+ g_level+"也就是"+LevelSwitch(g_level)+" 而，原数值为"+s_level+"也就是"+LevelSwitch(s_level));
                 targetPlayer.sendMessage("阶段被设置为 "+LevelSwitch(g_level));

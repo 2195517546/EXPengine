@@ -21,6 +21,8 @@ public class EXPenginehelp implements CommandExecutor {
         sender.sendMessage("/expengine 获取帮助");
         sender.sendMessage("/expengine help 获取帮助");
         sender.sendMessage("/expengine exp [玩家名称] 查询自己的修为");
+        sender.sendMessage("/expoperater op指令");
+        sender.sendMessage("expsystem 系统指令");
         //记得添加查询别人的修为,已完成。
     }
     @Override
