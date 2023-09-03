@@ -21,7 +21,7 @@ MC插件,API版本是1.20
 level:阶段名称<br>
 leveltolevel:升级所需修为,1:100指从1升级到2要100<br>
 leveltribualation:渡劫等级，比如金丹期要渡劫并且雷劈4次就是14:4<br>
-levelad:破境界公告:`数字`境界等级;`self`若为0则仅为自己可见;`words`破境界标语<br>
+levelad:破境界公告:`数字`境界等级;`self`若为0则可见，非0则仅自己可见;`words`破境界标语<br>
 levelquailty:`数字`境界等级;`healthpoint`生命值加成;`magicpoint`法力值加成<br>
 level[数字]:表示第n种修炼阶段，比如体法双修
 ## 更新

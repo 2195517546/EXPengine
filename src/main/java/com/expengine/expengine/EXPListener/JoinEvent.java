@@ -19,6 +19,7 @@ public class JoinEvent implements Listener {
         filein.set("exp",0);
         filein.set("level",0);
         filein.set("hideexp",0);
+        filein.set("tribualation",0);
         filein.set("baseattrib.healthpoint",0);
         filein.set("baseattrib.magicpoint",0);
     }
