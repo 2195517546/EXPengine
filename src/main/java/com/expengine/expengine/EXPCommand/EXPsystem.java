@@ -68,7 +68,7 @@ public class EXPsystem implements CommandExecutor {
                     sender.sendMessage("你已提升至"+LevelSwitch(level));
                     if(EXPengine.getInstance().getConfig().getBoolean("levellad."+level) && 0 == EXPengine.getInstance().getConfig().getInt("levellad."+level+".self")){
                         String word=EXPengine.getInstance().getConfig().getString("levelad."+level+"words");
-                        org.bukkit.Bukkit.broadcastMessage(word);
+                        org.bukkit.Bukkit.broadcastMessage(sender.getName() +" "+ word);
                     }
                 }else{
                     sender.sendMessage("修为不足,无法进阶");
