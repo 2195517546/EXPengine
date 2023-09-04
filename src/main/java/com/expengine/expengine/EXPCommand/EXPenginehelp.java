@@ -59,7 +59,7 @@ public class EXPenginehelp implements CommandExecutor {
                 /*
                 * 1.能够taggetplayer.sendMessage(XXXXXX)
                 * 2.targetplayer.getname 必须是 t_name
-                * */
+                * *///
                 File targetFile=new File(folder.getAbsolutePath()+"\\"+t_name+".yml");
                 File senderFile=new File(folder.getAbsolutePath()+"\\"+s_name+".yml");
 
