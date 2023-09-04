@@ -47,15 +47,12 @@ public class EXPsystem implements CommandExecutor {
                 int level = senderUse.getInt("level");//获取当前level
                 int hp=senderUse.getInt("baseattrib.healthpoint");
                 int mp=senderUse.getInt("baseattrib.magicpoint");
-                boolean error_C_exp =EXPengine.getInstance().getConfig().getBoolean("leveltolevel."+level);
-                if(!error_C_exp)
-                {
-                    sender.sendMessage("进阶未知");
-                    return false;
+                if(!EXPengine.getInstance().getConfig().contains("leveltolevel."+level)){
+                    sender.sendMessage("无法找到对应升级所需error");
+                    return  false;
                 }
                 int c_exp = EXPengine.getInstance().getConfig().getInt("leveltolevel."+level);//升级所需level
-                int levelTribualation = level+1;
-                if(EXPengine.getInstance().getConfig().getBoolean("leveltribualation."+levelTribualation))
+                if(EXPengine.getInstance().getConfig().contains("leveltribualation."+level))
                 {
                     sender.sendMessage("你需要渡劫,才能提升");
                     return false;
@@ -65,8 +62,8 @@ public class EXPsystem implements CommandExecutor {
                     //更新提醒，设置一个dujie=1或者0,当升级的时候判断下一等级是否渡劫。
                     int f_exp = s_exp-c_exp;
                     level++;
-                    int f_hp=hp+EXPengine.getInstance().getConfig().getInt("levelquailty."+level+"healthpoint");
-                    int f_mp=mp+EXPengine.getInstance().getConfig().getInt("levelquailty."+level+"magicpoint");
+                    int f_hp=hp+EXPengine.getInstance().getConfig().getInt("levelquailty."+level+".healthpoint");
+                    int f_mp=mp+EXPengine.getInstance().getConfig().getInt("levelquailty."+level+".magicpoint");
 
                     //保存
                     senderUse.set("baseattrib.healthpoint",f_hp);
