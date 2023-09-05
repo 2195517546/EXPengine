@@ -50,6 +50,16 @@ public final class EXPengine extends JavaPlugin {
         CommandSender sender = Bukkit.getConsoleSender();
         sender.sendMessage(s);
     }
+    public static String LevelSwitch(int l_num) //level数字转level文字
+    {
+        String key = "level."+ l_num ;
+        if(EXPengine.getInstance().getConfig().contains(key))
+        {
+            return EXPengine.getInstance().getConfig().getString(key);
+        }else{
+            return "error,阶段过高或过低导致不在天机之中";
+        }
+    }
     private void registerConfig()//一种不需要在关闭逻辑保存的config创建方式
     {
         getConfig().options().copyDefaults(true);

@@ -12,6 +12,8 @@ import org.bukkit.event.Listener;
 import java.io.File;
 import java.security.Key;
 
+import static com.expengine.expengine.EXPengine.LevelSwitch;
+
 public class EXPenginehelp implements CommandExecutor {
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
     public void helpMenuSender(CommandSender sender)
@@ -98,14 +100,5 @@ public class EXPenginehelp implements CommandExecutor {
         }
         return false;
     }
-    public String LevelSwitch(int l_num) //level数字转level文字
-    {
-        String key = "level."+l_num;
-        if(EXPengine.getInstance().getConfig().contains(key))
-        {
-            return new String(EXPengine.getInstance().getConfig().getString(key));
-        }else{
-            return new String("error");
-        }
-    }
+
 }

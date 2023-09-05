@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 
+import static com.expengine.expengine.EXPengine.LevelSwitch;
 import static java.lang.Integer.parseInt;
 
 public class EXPengineOPhelp implements CommandExecutor {
@@ -166,14 +167,5 @@ public class EXPengineOPhelp implements CommandExecutor {
         }
         return false;
     }
-    public String LevelSwitch(int l_num) //level数字转level文字
-    {
-        String key = "level."+l_num;
-        if(EXPengine.getInstance().getConfig().contains(key))
-        {
-            return EXPengine.getInstance().getConfig().getString(key);
-        }else{
-            return "error,阶段过高或过低导致不在天机之中";
-        }
-    }
+
 }
