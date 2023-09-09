@@ -27,8 +27,7 @@ MC插件,API版本是1.20
 `levelquailty`:`数字`境界等级;`healthpoint`生命值加成;`magicpoint`法力值加成<br>
 `level[数字]`:表示第n种修炼阶段，比如体法双修
 ## 更新
-#### config增加了level键，自定义修为每个阶段的的名称;
-#### config增加
+#### 渡劫系统以及命令补全
 ## [最新]增加了管理员命令
 `/expo giveexp [玩家名] [数量]` 给经验<br>
 `/expo removexp [玩家名] [数量]` 减经验(最少到0<br>

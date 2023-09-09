@@ -6,9 +6,11 @@ import com.expengine.expengine.EXPCommand.EXPsystem;
 import com.expengine.expengine.EXPListener.JoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Objects;
 
 public final class EXPengine extends JavaPlugin {
     private static EXPengine instance;
@@ -24,8 +26,10 @@ public final class EXPengine extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new JoinEvent(),this);//监听加入事件
 
         //命令注册
+
         getCommand("expengine").setExecutor(new EXPenginehelp());
-        getCommand("expsystem").setExecutor(new EXPsystem());
+        Objects.requireNonNull(Bukkit.getPluginCommand("expsystem")).setExecutor(new EXPsystem());
+        Objects.requireNonNull(Bukkit.getPluginCommand("expsystem")).setTabCompleter((TabCompleter) new EXPsystem());
         getCommand("expoperater").setExecutor(new EXPengineOPhelp());
 
         //Bukkit.getPluginCommand().register();
