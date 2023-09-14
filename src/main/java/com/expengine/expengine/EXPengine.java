@@ -28,8 +28,9 @@ public final class EXPengine extends JavaPlugin {
         //命令注册
 
         getCommand("expengine").setExecutor(new EXPenginehelp());
-        Objects.requireNonNull(Bukkit.getPluginCommand("expsystem")).setExecutor(new EXPsystem());
-        Objects.requireNonNull(Bukkit.getPluginCommand("expsystem")).setTabCompleter((TabCompleter) new EXPsystem());
+        getCommand("expsystem").setExecutor(new EXPsystem());
+        getCommand("expsystem").setTabCompleter(new EXPsystem());
+//        Objects.requireNonNull(Bukkit.getPluginCommand("expsystem")).setTabCompleter(new EXPengine());
         getCommand("expoperater").setExecutor(new EXPengineOPhelp());
 
         //Bukkit.getPluginCommand().register();

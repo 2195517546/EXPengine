@@ -1,24 +1,24 @@
 package com.expengine.expengine.EXPCommand;
 
 import com.expengine.expengine.EXPengine;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Evoker;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Spellcaster;
 import org.jetbrains.annotations.NotNull;//22
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static com.expengine.expengine.EXPengine.LevelSwitch;
 
-public class EXPsystem implements CommandExecutor {
+public class EXPsystem implements CommandExecutor, TabExecutor {
 
     public void helpMenuSender(CommandSender sender)
     {
@@ -31,16 +31,7 @@ public class EXPsystem implements CommandExecutor {
 
     }
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String s, String[] args)
-    {
-        if(sender instanceof Player) {//是否为玩家
-            if(args.length > 3) return null;//三个参数输入完了，不提示
-            if(args.length == 0||args.length==1) return Collections.singletonList("help");//没有参数，或者已有一个参数
 
-            return Collections.singletonList("help");
-        }
-        return null;
-    }
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s,String[] args) {
         if(args.length==0)
@@ -55,21 +46,21 @@ public class EXPsystem implements CommandExecutor {
                 helpMenuSender(sender);
             }
 
-            //渡劫
-            if(argis.equalsIgnoreCase("tribulate"))
-            {
-                String s_name = sender.getName();
-                File senderFile=new File(folder.getAbsolutePath()+"\\"+s_name+".yml");
-                FileConfiguration senderUse= YamlConfiguration.loadConfiguration(senderFile);
-                int s_exp = senderUse.getInt("exp");//获取当前EXP
-                int level = senderUse.getInt("level");//获取当前level
-                if(!EXPengine.getInstance().getConfig().contains("leveltribualation."+level))
-                {
-                    sender.sendMessage("当前等级无需渡劫");
-                    return false;
-                }
-
-            }
+//            //渡劫
+//            if(argis.equalsIgnoreCase("tribulate"))
+//            {
+//                String s_name = sender.getName();
+//                File senderFile=new File(folder.getAbsolutePath()+"\\"+s_name+".yml");
+//                FileConfiguration senderUse= YamlConfiguration.loadConfiguration(senderFile);
+//                int s_exp = senderUse.getInt("exp");//获取当前EXP
+//                int level = senderUse.getInt("level");//获取当前level
+//                if(!EXPengine.getInstance().getConfig().contains("leveltribualation."+level))
+//                {
+//                    sender.sendMessage("当前等级无需渡劫");
+//                    return false;
+//                }
+//
+//            }
 
             //进阶
             if(argis.equalsIgnoreCase("levelup"))
@@ -88,7 +79,7 @@ public class EXPsystem implements CommandExecutor {
                 int c_exp = EXPengine.getInstance().getConfig().getInt("leveltolevel."+level);//升级所需level
                 if(EXPengine.getInstance().getConfig().contains("leveltribualation."+level))
                 {
-                    sender.sendMessage("你需要渡劫,才能提升");
+                    sender.sendMessage("你需要突破瓶颈,才能提升");
                     return false;
                 }
                 if(s_exp>=c_exp)
@@ -126,4 +117,16 @@ public class EXPsystem implements CommandExecutor {
         return false;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String s,String[] args) {
+        if(args.length == 1)
+        {
+            List<String> list =new ArrayList<>();
+            list.add("help");
+            list.add("levelup");
+            return list;
+
+        }
+        return null;
+    }
 }
