@@ -4,6 +4,7 @@ import com.expengine.expengine.EXPengine;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -11,11 +12,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.expengine.expengine.EXPengine.LevelSwitch;
 import static java.lang.Integer.parseInt;
 
-public class EXPengineOPhelp implements CommandExecutor {
+public class EXPengineOPhelp implements CommandExecutor , TabExecutor {
     public void helpMenuSender(CommandSender sender)
     {
         sender.sendMessage("EXPengine的OP指令有:");
@@ -166,6 +169,22 @@ public class EXPengineOPhelp implements CommandExecutor {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String s, String[] args) {
+        if(args.length == 1)
+        {
+            List<String> list =new ArrayList<>();
+            list.add("help");
+            list.add("reload");
+            list.add("giveexp");
+            list.add("removexp");
+            list.add("setlevel");
+            return list;
+
+        }
+        return null;
     }
 
 }

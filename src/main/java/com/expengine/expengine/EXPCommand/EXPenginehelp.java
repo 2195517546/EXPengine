@@ -4,17 +4,22 @@ import com.expengine.expengine.EXPengine;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.security.Key;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.expengine.expengine.EXPengine.LevelSwitch;
 
-public class EXPenginehelp implements CommandExecutor {
+public class EXPenginehelp implements CommandExecutor , TabExecutor {
     File folder = new File(EXPengine.getInstance().getDataFolder(),"\\playeryml");
     public void helpMenuSender(CommandSender sender)
     {
@@ -24,7 +29,7 @@ public class EXPenginehelp implements CommandExecutor {
         sender.sendMessage("/expengine help 获取帮助");
         sender.sendMessage("/expengine exp [玩家名称] 查询自己的修为");
         sender.sendMessage("/expoperater op指令");
-        sender.sendMessage("expsystem 系统指令");
+        sender.sendMessage("/expsystem 系统指令");
         //记得添加查询别人的修为,已完成。
     }
     @Override
@@ -101,4 +106,16 @@ public class EXPenginehelp implements CommandExecutor {
         return false;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String s,String[] args) {
+        if(args.length == 1)
+        {
+            List<String> list =new ArrayList<>();
+            list.add("help");
+            list.add("exp");
+            return list;
+
+        }
+        return null;
+    }
 }

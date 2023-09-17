@@ -1,5 +1,5 @@
 name: EXPengine
-version: 0.0.6-SNAPSHOT
+version: 0.0.7
 main: com.expengine.expengine.EXPengine
 api-version: 1.20
 author: Uiloalxise
